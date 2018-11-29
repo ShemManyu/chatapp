@@ -3,6 +3,9 @@
 {% block content %}
 <div class="container-narrow">
   <h1 class="mt-5">Register</h1>
+    <h2>Use social to join</h2>
+    <p><a class="btn btn-primary" href="/google/login">Google</a></p>
+    <p><a class="btn btn-primary" href="/github/login">GitHub</a></p>
     <br/>
     <form id="registerForm" class="form form-register" method="POST" action="" role="form">
            {{ form.csrf_token }}

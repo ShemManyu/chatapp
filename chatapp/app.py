@@ -3,7 +3,7 @@
 from flask import Flask, render_template
 
 from chatapp import commands, public, user
-from chatapp.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, webpack
+from chatapp.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, webpack, oauth
 
 
 def create_app(config_object='chatapp.settings'):
@@ -26,6 +26,7 @@ def register_extensions(app):
     bcrypt.init_app(app)
     cache.init_app(app)
     db.init_app(app)
+    oauth.init_app(app)
     csrf_protect.init_app(app)
     login_manager.init_app(app)
     debug_toolbar.init_app(app)
@@ -37,6 +38,8 @@ def register_extensions(app):
 def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(public.views.blueprint)
+    app.register_blueprint(public.views.github_bp, url_prefix='/github')
+    app.register_blueprint(public.views.google_bp, url_prefix='/google')
     app.register_blueprint(user.views.blueprint)
     return None
 
